@@ -4,11 +4,17 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Trang Web Thanh Toán By Tú</title>
+
+<!-- Áp dụng theme sớm để tránh nháy -->
+<script>
+(()=>{ const t=localStorage.getItem('theme'); if(t==='light')document.documentElement.classList.remove('dark'); else document.documentElement.classList.add('dark'); })();
+</script>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  /* ====== Theme nền dịu (Light/Dark) ====== */
-  body{--bg:#f6f8fe;--card:#ffffff;--border:#e7eaf3;--txt:#0f172a;--sub:#5b6476}
-  body.dark{--bg:#0b1220;--card:#0f172a;--border:#18243b;--txt:#e6ecff;--sub:#98a3b8}
+  /* ===== Theme ===== */
+  :root{--bg:#f6f8fe;--card:#ffffff;--border:#e7eaf3;--txt:#0f172a;--sub:#5b6476}
+  html.dark{--bg:#0b1220;--card:#0f172a;--border:#18243b;--txt:#e6ecff;--sub:#98a3b8}
   html,body{background:var(--bg);color:var(--txt)}
   .card{background:var(--card);border:1px solid var(--border);border-radius:16px}
   .subtle{color:var(--sub)}
@@ -16,25 +22,21 @@
   .readonly{background:rgba(148,163,184,.12)}
   .lbl{display:block;font-size:.92rem;font-weight:700;margin-bottom:.35rem}
 
-  /* ====== Header + sóng nền ở TOP ====== */
-  .header-hero{position:relative;overflow:hidden;border-radius:18px;padding:24px 16px}
-  .header-waves{position:absolute;inset:0 0 -40% 0;z-index:-1;pointer-events:none}
+  /* ===== Header + waves ===== */
+  .header-hero{position:relative;overflow:visible;border-radius:18px;padding:18px 16px}
+  .header-waves{position:absolute;inset:0 0 -40% 0;z-index:0;pointer-events:none}
   .hw{position:absolute;left:0;right:0;bottom:-1px;height:120px;width:200%;background-repeat:repeat-x;background-size:50% 120px;animation:hw 18s linear infinite;opacity:.85}
   .hw:nth-child(1){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="120"><path fill="%23eef2ff" d="M0 50C270 230 830 -110 1600 50V120H0z"/></svg>')}
   .hw:nth-child(2){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="120"><path fill="%23e5ecff" d="M0 60C270 240 830 -100 1600 60V120H0z"/></svg>');animation-duration:22s;bottom:8px}
   .hw:nth-child(3){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="120"><path fill="%23dde7ff" d="M0 70C270 250 830 -90 1600 70V120H0z"/></svg>');animation-duration:28s;bottom:16px}
   @keyframes hw{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ====== Tiêu đề: luôn 1 dòng ====== */
+  /* ===== Title (Light viền, Dark 7 màu) ===== */
   .brand-title{
-    font-size:clamp(26px,4.2vw,44px);
-    font-weight:900;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-    line-height:1.05;
-    white-space:nowrap; /* luôn 1 dòng */
+    position:relative; z-index:1;
+    font-size:clamp(22px,4.2vw,44px); font-weight:900; letter-spacing:.3px;
+    text-transform:uppercase; line-height:1.1; white-space:nowrap;
   }
-  /* Light: chữ đậm + viền nổi */
   .brand-title .t-main{
     color:#0f172a;
     text-shadow:0 1px 0 #fff,0 2px 0 rgba(255,255,255,.9),0 3px 2px rgba(0,0,0,.08),0 6px 12px rgba(0,0,0,.06)
@@ -43,17 +45,17 @@
     color:#4f46e5;
     text-shadow:0 1px 0 #fff,0 2px 0 rgba(255,255,255,.9),0 3px 2px rgba(79,70,229,.18),0 6px 12px rgba(79,70,229,.12)
   }
-  /* Dark: 7 màu + glow */
-  body.dark .brand-title{
+  html.dark .brand-title{
     background:linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet, red);
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;
     background-size:1400% 1400%;animation:brandRainbow 8s ease infinite;
     text-shadow:0 0 10px rgba(255,255,255,.35),0 0 22px rgba(255,255,255,.25)
   }
-  body.dark .brand-title .t-main, body.dark .brand-title .t-name{ text-shadow:none }
+  html.dark .brand-title .t-main, html.dark .brand-title .t-name{ text-shadow:none }
   @keyframes brandRainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @media (max-width:420px){ .brand-title{white-space:normal;text-wrap:balance;font-size:clamp(18px,6vw,28px)} }
 
-  /* ====== Waves dưới cùng trang ====== */
+  /* ===== Waves bottom ===== */
   .wave-bg{position:fixed;inset:auto 0 0 0;height:40vh;z-index:-1;pointer-events:none}
   .wave{position:absolute;left:0;right:0;bottom:-1px;height:140px;width:200%;background-repeat:repeat-x;background-size:50% 140px;animation:wm 20s linear infinite}
   .wave:nth-child(1){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="140"><path fill="%23d9ecff" d="M0 70C270 270 830 -130 1600 70V140H0z"/></svg>')}
@@ -61,16 +63,16 @@
   .wave:nth-child(3){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="140"><path fill="%23f1f8ff" d="M0 94C270 294 830 -106 1600 94V140H0z"/></svg>');animation-duration:32s;bottom:24px;opacity:.8}
   @keyframes wm{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ====== Bank card + logo ====== */
+  /* ===== Bank cards ===== */
   .bank-card{display:flex;align-items:center;gap:.8rem;padding:.85rem 1rem;border:1px solid var(--border);
              border-radius:14px;background:var(--card);cursor:pointer;transition:.2s box-shadow,.15s border-color}
   .bank-card:hover{box-shadow:0 10px 26px rgba(2,6,23,.10)}
   .bank-card.active{border-color:#6366f1;box-shadow:0 8px 28px rgba(99,102,241,.22)}
   .chip{margin-left:auto;font-size:.72rem;padding:.2rem .55rem;border-radius:.6rem;background:#eef2ff;color:#334155}
-  body.dark .chip{background:#15223a;color:#cbd5e1}
+  html.dark .chip{background:#15223a;color:#cbd5e1}
   .bank-logo{height:28px;width:auto;object-fit:contain}
 
-  /* ====== Text gợn sóng + ripple nút ====== */
+  /* ===== Wave text + ripple buttons ===== */
   .wave-text{
     font-weight:800;letter-spacing:.4px;
     background:linear-gradient(90deg,#0ea5e9,#1e293b,#0ea5e9);
@@ -79,12 +81,13 @@
   }
   @keyframes tw{0%{background-position:0% 50%}100%{background-position:200% 50%}}
   .btn-ripple{position:relative;overflow:hidden;background:linear-gradient(180deg,#0f172a,#0b1023);
-              color:#fff;border:1px solid #0b1023;border-radius:10px;padding:.6rem 1rem;font-weight:700}
+              color:#fff;border:1px solid #0b1023;border-radius:10px;padding:.65rem 1rem;font-weight:700}
   .btn-ripple .r{position:absolute;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;
     background:radial-gradient(circle,rgba(14,165,233,.55) 0, rgba(14,165,233,.25) 40%, rgba(14,165,233,0) 70%)}
   .btn-ripple:hover{filter:brightness(1.08)} .btn-ripple:active{transform:scale(.98)}
+  .tap-btn{min-height:40px;min-width:44px}
 
-  /* ====== Footer rainbow luôn 7 màu & 1 dòng ====== */
+  /* ===== Footer rainbow ===== */
   .rainbow-text{
     font-weight:800;font-size:28px;text-align:center;margin:40px 0;
     text-transform:uppercase;white-space:nowrap;
@@ -95,21 +98,28 @@
   }
   @keyframes rainbowFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-  .min-chip{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font-size:.74rem;
-            padding:.15rem .45rem;border-radius:.5rem;background:#eef2ff;color:#334155}
-  body.dark .min-chip{background:#15223a;color:#cbd5e1}
+  /* ===== Responsive YouTube at bottom ===== */
+  .video-wrap{position:relative; padding-top:56.25%; border-radius:14px; overflow:hidden; background:#000}
+  .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .contact-buttons a{display:inline-flex; align-items:center; justify-content:center; gap:.5rem}
 </style>
 </head>
 <body class="dark">
-  <!-- Header + nút -->
+
+  <!-- Header -->
   <div class="max-w-5xl mx-auto px-4 pt-5 pb-3 flex items-center justify-between header-hero">
     <div class="header-waves"><div class="hw"></div><div class="hw"></div><div class="hw"></div></div>
+
     <h1 class="brand-title">
       <span class="t-main">TRANG WEB THANH TOÁN</span>&nbsp;<span class="t-name">BY TÚ</span>
     </h1>
-    <div class="flex items-center gap-2 shrink-0">
-      <button id="btnTheme" class="px-3 py-1.5 rounded-lg border">🌓 Nền tối / sáng</button>
-      <button id="btnMusic" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">▶️ Play nhạc</button>
+
+    <div class="flex items-center gap-2 shrink-0 header-hero-actions">
+      <button id="btnTheme" class="tap-btn px-3 py-1.5 rounded-lg border" aria-label="Đổi nền">🌓</button>
+      <button id="btnMusic" class="tap-btn px-3 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700" aria-label="Bật/tắt nhạc">🎵</button>
+      <!-- Audio ưu tiên nếu có (giữ nếu bạn muốn dùng file mp3) -->
+      <audio id="bgAudio" preload="none" loop src=""></audio>
+      <!-- YouTube fallback/nhạc -->
       <div id="yt-holder" class="hidden"></div>
     </div>
   </div>
@@ -118,6 +128,7 @@
     <!-- Bank choose -->
     <section class="card p-5 sm:p-6 mb-6">
       <h2 class="font-semibold mb-4 text-lg">Chọn Ngân Hàng & Thông tin người nhận</h2>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         <!-- MB -->
         <label class="bank-card active" id="cardMB">
@@ -130,6 +141,7 @@
           </div>
           <span class="chip">Đang chọn</span>
         </label>
+
         <!-- VCB -->
         <label class="bank-card" id="cardVCB">
           <input type="radio" name="bank" value="VCB" class="hidden" />
@@ -207,7 +219,7 @@
         <input id="email" type="email" placeholder="example@gmail.com" class="inp" />
       </div>
 
-      <button id="btnCreate" class="mt-4 w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">
+      <button id="btnCreate" class="mt-4 w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold tap-btn">
         Tạo QR
       </button>
     </section>
@@ -215,25 +227,34 @@
     <!-- Result -->
     <section id="qrWrap" class="mt-6"></section>
 
-    <!-- Thông tin liên hệ & nhóm -->
-    <section class="card p-5 sm:p-6 mt-6">
-      <h2 class="font-semibold mb-3 text-lg">Thông tin liên hệ & nhóm</h2>
-      <div class="space-y-2 text-sm">
-        <p><b>Ad 3 Group Tổng Cọc 4M</b></p>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Ad 11 Nguyễn Thịnh:
-            <a class="text-indigo-500 underline break-all" href="https://www.facebook.com/share/p/1DECCTH95W/" target="_blank" rel="noopener">https://www.facebook.com/share/p/1DECCTH95W/</a>
-          </li>
-          <li>Ad 5 Childhood Sv4:
-            <a class="text-indigo-500 underline break-all" href="https://www.facebook.com/share/p/1CGeXmm3RF/" target="_blank" rel="noopener">https://www.facebook.com/share/p/1CGeXmm3RF/</a>
-          </li>
-          <li>Ad 8 Tùng Hùng (HSNR):
-            <a class="text-indigo-500 underline break-all" href="https://www.facebook.com/share/p/1FKyH9Ct5j/" target="_blank" rel="noopener">https://www.facebook.com/share/p/1FKyH9Ct5j/</a>
-          </li>
-        </ul>
-        <p class="mt-3"><b>Zalo:</b> 0326615531 – <b>Phạm Anh Tú</b></p>
-        <p class="mt-1">Trân trọng!</p>
+    <!-- Liên hệ -->
+    <section class="card p-5 sm:p-6 mt-6 contact-buttons">
+      <h2 class="font-semibold mb-3 text-lg">Liên hệ nhanh</h2>
+      <div class="flex flex-wrap gap-3">
+        <!-- Zalo: không hiện số, bấm là mở Zalo -->
+        <a href="https://zalo.me/0326615531" target="_blank" rel="noopener"
+           class="btn-ripple tap-btn px-4 py-2 rounded-lg">
+          💬 Mở Zalo
+        </a>
+        <!-- Facebook: mở trang FB -->
+        <a href="https://www.facebook.com/thanhxuanngungoc" target="_blank" rel="noopener"
+           class="btn-ripple tap-btn px-4 py-2 rounded-lg">
+          👍 Mở Facebook
+        </a>
       </div>
+    </section>
+
+    <!-- Video YouTube ở cuối trang -->
+    <section class="card p-5 sm:p-6 mt-6" id="video">
+      <h2 class="font-semibold mb-3 text-lg">Video nhạc</h2>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/I21BpYYoMsk?rel=0&modestbranding=1"
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+      <p class="text-xs subtle mt-2">* Bạn có thể bấm 🎵 ở trên để phát/đổi nhạc nền (ẩn), hoặc xem video trực tiếp tại đây.</p>
     </section>
 
     <footer class="mt-10 text-center">
@@ -241,39 +262,48 @@
     </footer>
   </main>
 
-  <!-- Waves dưới cùng -->
+  <!-- Bottom waves -->
   <div class="wave-bg"><div class="wave"></div><div class="wave"></div><div class="wave"></div></div>
 
 <script>
-  /* ===== YouTube music ===== */
-  const YT_VIDEO_ID = "KmrCmHoNZPk";
-  let ytPlayer=null, ytReady=false, ytPlaying=false;
-  function onYouTubeIframeAPIReady(){
-    ytPlayer = new YT.Player('yt-holder', {
-      height:'0', width:'0', videoId:YT_VIDEO_ID,
-      playerVars:{autoplay:0,controls:0,loop:1,playlist:YT_VIDEO_ID,modestbranding:1},
-      events:{onReady:()=>ytReady=true}
-    });
-  }
-  const s=document.createElement('script'); s.src="https://www.youtube.com/iframe_api"; document.head.appendChild(s);
-  const btnMusic=document.getElementById('btnMusic');
-  btnMusic.addEventListener('click', ()=>{
-    if(!ytReady) return alert("Đang tải nhạc, thử lại sau 1 giây.");
-    try{
-      if(!ytPlaying){ ytPlayer.playVideo(); ytPlaying=true; btnMusic.textContent="⏸️ Pause nhạc"; }
-      else{ ytPlayer.pauseVideo(); ytPlaying=false; btnMusic.textContent="▶️ Play nhạc"; }
-    }catch(e){}
-  });
-
-  /* ===== Theme toggle ===== */
+  /* ===== THEME TOGGLE ===== */
   const btnTheme=document.getElementById('btnTheme');
-  if(localStorage.getItem('theme')==='light'){ document.body.classList.remove('dark'); }
-  btnTheme.addEventListener('click', ()=>{
-    document.body.classList.toggle('dark');
-    localStorage.setItem('theme', document.body.classList.contains('dark')?'dark':'light');
+  const toggleTheme=()=>{ const r=document.documentElement; r.classList.toggle('dark'); localStorage.setItem('theme', r.classList.contains('dark')?'dark':'light'); };
+  btnTheme.addEventListener('click', toggleTheme, {passive:true});
+  btnTheme.addEventListener('touchstart', (e)=>{e.preventDefault();toggleTheme();},{passive:false});
+
+  /* ===== MUSIC: dùng YouTube ID mới ===== */
+  const btnMusic=document.getElementById('btnMusic');
+  const audioEl=document.getElementById('bgAudio'); // để trống src => dùng YouTube
+  let usingAudio=!!audioEl.getAttribute('src'), audioReady=false;
+  let ytLoaded=false, ytReady=false, ytPlayer=null, ytPlaying=false;
+  const YT_VIDEO_ID="I21BpYYoMsk"; // <== ID mới
+
+  function loadYT(){
+    if(ytLoaded) return; ytLoaded=true;
+    const s=document.createElement('script'); s.src="https://www.youtube.com/iframe_api"; document.head.appendChild(s);
+    window.onYouTubeIframeAPIReady=function(){
+      ytPlayer=new YT.Player('yt-holder',{height:'0',width:'0',videoId:YT_VIDEO_ID,
+        playerVars:{autoplay:0,controls:0,loop:1,playlist:YT_VIDEO_ID,modestbranding:1},
+        events:{onReady:()=>ytReady=true}});
+    };
+  }
+
+  btnMusic.addEventListener('click', async ()=>{
+    try{
+      if(usingAudio){
+        if(!audioReady){ await audioEl.play(); audioEl.pause(); audioReady=true; }
+        if(audioEl.paused){ await audioEl.play(); btnMusic.textContent="⏸️"; }
+        else { audioEl.pause(); btnMusic.textContent="🎵"; }
+      }else{
+        loadYT();
+        const tryPlay=()=>{ if(ytReady){ if(!ytPlaying){ ytPlayer.playVideo(); ytPlaying=true; btnMusic.textContent="⏸️"; } else { ytPlayer.pauseVideo(); ytPlaying=false; btnMusic.textContent="🎵"; } } else setTimeout(tryPlay,200); };
+        tryPlay();
+      }
+    }catch(e){ alert("Trình duyệt đang chặn phát nhạc. Bấm lại để phát."); }
   });
 
-  /* ===== Banks ===== */
+  /* ===== BANKS ===== */
   const BANKS={ MB:{code:"MB",name:"MB Bank",account:"0326615531"}, VCB:{code:"VCB",name:"Vietcombank",account:"9965003865"} };
   let currentBank="MB";
   const cardMB=document.getElementById('cardMB');
@@ -292,12 +322,11 @@
   cardVCB.addEventListener('click',()=>setBank("VCB"));
   setBank("MB");
 
-  /* ===== Amount format & validate ===== */
+  /* ===== Amount format/validate ===== */
   const MIN_AMOUNT=10000;
   const nf=new Intl.NumberFormat('vi-VN');
   const amtInput=document.getElementById('amount'), amtErr=document.getElementById('amountErr');
   const parseAmt=v=>Number(String(v).replace(/[^\d]/g,""));
-  const getAmt=()=>parseAmt(amtInput.value);
   amtInput.addEventListener('input',()=>{
     const raw=parseAmt(amtInput.value);
     amtInput.value=raw?nf.format(raw):"";
@@ -313,18 +342,15 @@
     return `${base}?${qs.toString()}`;
   }
 
-  /* ===== ND & countdown ===== */
+  /* ===== Helpers: ND + countdown + ripple + copy ===== */
   const rand4=()=>String(Math.floor(Math.random()*10000)).padStart(4,"0");
   const makeND=prod=>`DV-${prod}-GEN${rand4()}`;
   let timer=null;
   function startCountdown(expireAt,onTick,onDone){
     if(timer) clearInterval(timer);
-    function up(){
-      const left=expireAt-Date.now();
-      if(left<=0){ clearInterval(timer); onDone(); return; }
+    function up(){ const left=expireAt-Date.now(); if(left<=0){ clearInterval(timer); onDone(); return; }
       const m=Math.floor(left/60000), s=Math.floor((left%60000)/1000);
-      onTick(`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`);
-    } up(); timer=setInterval(up,1000);
+      onTick(`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`);} up(); timer=setInterval(up,1000);
   }
   function ripple(e){
     const btn=e.currentTarget, r=document.createElement('span'); r.className='r';
@@ -333,9 +359,42 @@
   }
   function copyTxt(t){ navigator.clipboard.writeText(t); }
 
+  /* ===== mở app ngân hàng + copy ND & tiền ===== */
+  const isAndroid=()=>/Android/i.test(navigator.userAgent);
+  const isiOS=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  async function openBankApp(bankKey, nd, amount){
+    try{ await navigator.clipboard.writeText(`ND: ${nd} | Số tiền: ${Number(amount).toLocaleString('vi-VN')}đ`);}catch(e){}
+    const cfg={
+      MB:{ scheme:'mbbank://', androidIntent:'intent://open#Intent;scheme=mbbank;package=com.mbmobile;end',
+           androidStore:'https://play.google.com/store/search?q=MB%20Bank&c=apps',
+           iosStore:'https://apps.apple.com/vn/search?term=MB%20Bank' },
+      VCB:{ scheme:'vcbdigibank://', androidIntent:'intent://open#Intent;scheme=vcbdigibank;package=com.vcb.digibank;end',
+           androidStore:'https://play.google.com/store/search?q=Vietcombank%20Digibank&c=apps',
+           iosStore:'https://apps.apple.com/vn/search?term=Vietcombank%20Digibank' }
+    };
+    const c=cfg[bankKey]; if(!c) return;
+    const fallback=()=>{ window.location.href = isAndroid()?c.androidStore:c.iosStore; };
+    try{
+      if(isAndroid()){ const t=setTimeout(fallback,1200); window.location.href=c.androidIntent; setTimeout(()=>clearTimeout(t),3000); }
+      else if(isiOS()){ const t=setTimeout(fallback,1200); window.location.href=c.scheme; setTimeout(()=>clearTimeout(t),3000); }
+      else fallback();
+    }catch(e){ fallback(); }
+  }
+
   /* ===== Render result ===== */
   function renderResult(nd, qrUrl, amount, email, expireAt, bankKey){
     const info=BANKS[bankKey], amtFmt=Number(amount||0).toLocaleString("vi-VN");
+
+    const bankBtn = bankKey==='MB'
+      ? `<button class="btn-ripple tap-btn w-full"
+            onclick="openBankApp('MB','${nd}',${amount})" onmousedown="ripple(event)">
+            Mở app MB Bank (đã copy ND & số tiền)
+         </button>`
+      : `<button class="btn-ripple tap-btn w-full"
+            onclick="openBankApp('VCB','${nd}',${amount})" onmousedown="ripple(event)">
+            Mở app Vietcombank (đã copy ND & số tiền)
+         </button>`;
+
     const wrap=document.getElementById('qrWrap');
     wrap.innerHTML=`
       <div id="qrCard" class="card p-5 sm:p-6 text-center">
@@ -348,27 +407,30 @@
             <div class="text-xs subtle mb-1">Nội dung chuyển khoản</div>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div class="wave-text text-lg break-all">${nd}</div>
-              <button class="btn-ripple" onclick="copyTxt('${nd}')" onmousedown="ripple(event)">Copy ND</button>
+              <button class="btn-ripple tap-btn" onclick="copyTxt('${nd}')" onmousedown="ripple(event)">Copy ND</button>
             </div>
           </div>
           <div class="border rounded-xl p-3">
             <div class="text-xs subtle mb-1">Số tài khoản đang dùng (${info.name})</div>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div class="wave-text text-lg">${info.account}</div>
-              <button class="btn-ripple" onclick="copyTxt('${info.account}')" onmousedown="ripple(event)">Copy STK</button>
+              <button class="btn-ripple tap-btn" onclick="copyTxt('${info.account}')" onmousedown="ripple(event)">Copy STK</button>
             </div>
           </div>
         </div>
 
+        <div class="mt-4">${bankBtn}</div>
+
         ${email?`<p class="text-sm subtle mt-2">Email khách: ${email}</p>`:""}
         <div class="mt-3 text-sm">⏳ Hết hạn sau: <b id="countdown">15:00</b></div>
       </div>`;
+
     const cd=document.getElementById('countdown'), img=document.getElementById('qrImg');
     startCountdown(expireAt,(t)=>cd.textContent=t,()=>{
       img.classList.add('opacity-30','grayscale');
       cd.textContent="HẾT HẠN";
       const b=document.createElement('button');
-      b.className='mt-3 btn-ripple'; b.textContent='Tạo lại QR mới';
+      b.className='mt-3 btn-ripple tap-btn'; b.textContent='Tạo lại QR mới';
       b.onmousedown=ripple; b.onclick=()=>location.reload();
       document.getElementById('qrCard').appendChild(b);
     });
@@ -378,7 +440,7 @@
   /* ===== Create QR ===== */
   document.getElementById('btnCreate').addEventListener('click',async ()=>{
     const product=document.getElementById('product').value.trim();
-    const amount=(()=>Number(String(document.getElementById('amount').value).replace(/[^\d]/g,'')))();
+    const amount=Number(String(document.getElementById('amount').value).replace(/[^\d]/g,''));
     const email=document.getElementById('email').value.trim();
     const style=document.getElementById('qrStyle').value.trim();
     const autoCopy=(document.getElementById('autoCopy').value==='1');
