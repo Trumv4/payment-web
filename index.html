@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Trang Web Thanh Toán By Tú</title>
 
+<!-- giữ theme người dùng -->
 <script>
 (()=>{ const t=localStorage.getItem('theme'); if(t==='light')document.documentElement.classList.remove('dark'); else document.documentElement.classList.add('dark'); })();
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
+
 <style>
   :root{--bg:#f6f8fe;--card:#ffffff;--border:#e7eaf3;--txt:#0f172a;--sub:#5b6476}
   html.dark{--bg:#0b1220;--card:#0f172a;--border:#18243b;--txt:#e6ecff;--sub:#98a3b8}
@@ -19,6 +21,7 @@
   .readonly{background:rgba(148,163,184,.12)}
   .lbl{display:block;font-size:.95rem;font-weight:700;margin-bottom:.35rem}
 
+  /* Header + wave */
   .header-hero{position:relative;border-radius:18px;padding:18px 16px}
   .header-waves{position:absolute;inset:0 0 -40% 0;z-index:0;pointer-events:none}
   .hw{position:absolute;left:0;right:0;bottom:-1px;height:120px;width:200%;background-repeat:repeat-x;background-size:50% 120px;animation:hw 18s linear infinite;opacity:.85}
@@ -27,6 +30,7 @@
   .hw:nth-child(3){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="120"><path fill="%23dde7ff" d="M0 70C270 250 830 -90 1600 70V120H0z"/></svg>');animation-duration:28s;bottom:16px}
   @keyframes hw{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+  /* Tiêu đề: Light có viền, Dark 7 màu */
   .brand-title{position:relative;z-index:1;font-size:clamp(22px,4.2vw,44px);font-weight:900;letter-spacing:.3px;text-transform:uppercase;line-height:1.1;white-space:nowrap}
   .brand-title .t-main{color:#0f172a;text-shadow:0 1px 0 #fff,0 2px 0 rgba(255,255,255,.9),0 3px 2px rgba(0,0,0,.08),0 6px 12px rgba(0,0,0,.06)}
   .brand-title .t-name{color:#4f46e5;text-shadow:0 1px 0 #fff,0 2px 0 rgba(255,255,255,.9),0 3px 2px rgba(79,70,229,.18),0 6px 12px rgba(79,70,229,.12)}
@@ -35,6 +39,7 @@
   @keyframes brandRainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
   @media (max-width:420px){ .brand-title{white-space:normal;text-wrap:balance;font-size:clamp(18px,6vw,28px)} }
 
+  /* Waves bottom */
   .wave-bg{position:fixed;inset:auto 0 0 0;height:40vh;z-index:-1;pointer-events:none}
   .wave{position:absolute;left:0;right:0;bottom:-1px;height:140px;width:200%;background-repeat:repeat-x;background-size:50% 140px;animation:wm 20s linear infinite}
   .wave:nth-child(1){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="140"><path fill="%23d9ecff" d="M0 70C270 270 830 -130 1600 70V140H0z"/></svg>')}
@@ -42,13 +47,16 @@
   .wave:nth-child(3){background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="140"><path fill="%23f1f8ff" d="M0 94C270 294 830 -106 1600 94V140H0z"/></svg>');animation-duration:32s;bottom:24px;opacity:.8}
   @keyframes wm{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .bank-card{display:flex;align-items:center;gap:.8rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--card);cursor:pointer;transition:.18s box-shadow,.12s border-color}
+  /* Bank cards */
+  .bank-card{display:flex;align-items:center;gap:.8rem;padding:1rem;border:1px solid var(--border);
+             border-radius:14px;background:var(--card);cursor:pointer;transition:.18s box-shadow,.12s border-color}
   .bank-card:hover{box-shadow:0 8px 22px rgba(2,6,23,.08)}
   .bank-card.active{border-color:#6366f1;box-shadow:0 8px 28px rgba(99,102,241,.22)}
   .chip{margin-left:auto;font-size:.72rem;padding:.25rem .6rem;border-radius:.6rem;background:#eef2ff;color:#334155}
   html.dark .chip{background:#15223a;color:#cbd5e1}
   .bank-logo{height:28px;width:auto;object-fit:contain}
 
+  /* Text + ripple button */
   .wave-text{font-weight:800;letter-spacing:.4px;background:linear-gradient(90deg,#0ea5e9,#1e293b,#0ea5e9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:tw 3.6s linear infinite}
   @keyframes tw{0%{background-position:0% 50%}100%{background-position:200% 50%}}
   .btn-ripple{position:relative;overflow:hidden;background:linear-gradient(180deg,#1e293b,#0b1023);color:#fff;border:2px solid rgba(255,255,255,.9);border-radius:12px;padding:.7rem 1rem;font-weight:800}
@@ -56,6 +64,7 @@
   .btn-ripple:hover{filter:brightness(1.08)} .btn-ripple:active{transform:scale(.98)}
   .tap-btn{min-height:44px;min-width:44px}
 
+  /* control buttons */
   #btnMusic{background:#4452ff;color:#fff;border:2px solid #fff;box-shadow:0 6px 20px rgba(68,82,255,.25)}
   #btnMusic.active{background:#ff4d6d}
   #btnTheme{border:2px solid #fff}
@@ -75,6 +84,7 @@
 </head>
 <body class="dark">
 
+  <!-- Header -->
   <div class="max-w-5xl mx-auto px-4 pt-5 pb-3 flex items-center justify-between header-hero">
     <div class="header-waves"><div class="hw"></div><div class="hw"></div><div class="hw"></div></div>
     <h1 class="brand-title"><span class="t-main">TRANG WEB THANH TOÁN</span>&nbsp;<span class="t-name">BY TÚ</span></h1>
@@ -85,43 +95,70 @@
   </div>
 
   <main class="max-w-5xl mx-auto px-4 pb-24">
+    <!-- Bank chọn (tài khoản nhận) -->
     <section class="card p-5 sm:p-6 mb-6">
       <h2 class="font-semibold mb-4 text-lg">Chọn Ngân Hàng & Thông tin người nhận</h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <!-- MB -->
         <label class="bank-card active" id="cardMB">
           <input type="radio" name="bank" value="MB" class="hidden" checked />
           <img class="bank-logo" src="assets/mb.png" alt="MB Bank"
-               onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;><rect width=&quot;64&quot; height=&quot;64&quot; rx=&quot;12&quot; fill=&quot;%23e11d48&quot;/><text x=&quot;32&quot; y=&quot;38&quot; font-size=&quot;28&quot; font-weight=&quot;800&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial&quot;>MB</text></svg>';">
-          <div class="min-w-0"><div class="font-semibold leading-tight">MB Bank</div><div class="text-xs subtle truncate">STK 0326615531 • Pham Anh Tu</div></div>
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;><rect width=&quot;64&quot; height=&quot;64&quot; rx=&quot;12&quot; fill=&quot;%23e11d48&quot;/><text x=&quot;32&quot; y=&quot;38&quot; font-size=&quot;28&quot; font-weight=&quot;800&quot; fill=&quot;white&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial&quot;>MB</text></svg>';">
+          <div class="min-w-0">
+            <div class="font-semibold leading-tight">MB Bank</div>
+            <div class="text-xs subtle truncate">STK 0326615531 • Pham Anh Tu</div>
+          </div>
           <span class="chip">Đang chọn</span>
         </label>
 
+        <!-- VCB -->
         <label class="bank-card" id="cardVCB">
           <input type="radio" name="bank" value="VCB" class="hidden" />
           <img class="bank-logo" src="assets/vcb.png" alt="Vietcombank"
-               onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;><rect width=&quot;64&quot; height=&quot;64&quot; rx=&quot;12&quot; fill=&quot;%2316a34a&quot;/><path d=&quot;M20 38c6-8 10-12 12-12s6 4 12 12-6 12-12 12-18-4-12-12z&quot; fill=&quot;white&quot;/></svg>';">
-          <div class="min-w-0"><div class="font-semibold leading-tight">Vietcombank</div><div class="text-xs subtle truncate">STK 9965003865 • Pham Anh Tu</div></div>
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;><rect width=&quot;64&quot; height=&quot;64&quot; rx=&quot;12&quot; fill=&quot;%2316a34a&quot;/><path d=&quot;M20 38c6-8 10-12 12-12s6 4 12 12-6 12-12 12-18-4-12-12z&quot; fill=&quot;white&quot;/></svg>';">
+          <div class="min-w-0">
+            <div class="font-semibold leading-tight">Vietcombank</div>
+            <div class="text-xs subtle truncate">STK 9965003865 • Pham Anh Tu</div>
+          </div>
           <span class="chip hidden">Đang chọn</span>
         </label>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div><label class="lbl">Ngân hàng (đang chọn)</label><input id="bankName" class="inp readonly" value="MB Bank" readonly /></div>
-        <div><label class="lbl">Số tài khoản</label><input id="account" class="inp readonly" value="0326615531" readonly /></div>
-        <div><label class="lbl">Chủ tài khoản</label><input class="inp readonly" value="Pham Anh Tu" readonly /></div>
+        <div>
+          <label class="lbl">Ngân hàng (đang chọn)</label>
+          <input id="bankName" class="inp readonly" value="MB Bank" readonly />
+        </div>
+        <div>
+          <label class="lbl">Số tài khoản</label>
+          <input id="account" class="inp readonly" value="0326615531" readonly />
+        </div>
+        <div>
+          <label class="lbl">Chủ tài khoản</label>
+          <input class="inp readonly" value="Pham Anh Tu" readonly />
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-        <div><label class="lbl">Kiểu ảnh QR</label>
-          <select id="qrStyle" class="inp"><option value="compact" selected>compact (logo + thông tin)</option><option value="qr_only">qr_only (chỉ QR)</option></select>
+        <div>
+          <label class="lbl">Kiểu ảnh QR</label>
+          <select id="qrStyle" class="inp">
+            <option value="compact" selected>compact (logo + thông tin)</option>
+            <option value="qr_only">qr_only (chỉ QR)</option>
+          </select>
         </div>
-        <div><label class="lbl">Tự copy ND sau khi tạo</label>
-          <select id="autoCopy" class="inp"><option value="1" selected>Có</option><option value="0">Không</option></select>
+        <div>
+          <label class="lbl">Tự copy ND sau khi tạo</label>
+          <select id="autoCopy" class="inp">
+            <option value="1" selected>Có</option>
+            <option value="0">Không</option>
+          </select>
         </div>
       </div>
     </section>
 
+    <!-- Form -->
     <section class="card p-5 sm:p-6">
       <h2 class="font-semibold mb-4 text-lg">Thông tin đơn hàng</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -149,11 +186,15 @@
         <input id="email" type="email" placeholder="example@gmail.com" class="inp" />
       </div>
 
-      <button id="btnCreate" class="mt-4 w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold tap-btn">Tạo QR</button>
+      <button id="btnCreate" class="mt-4 w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold tap-btn">
+        Tạo QR
+      </button>
     </section>
 
+    <!-- Kết quả -->
     <section id="qrWrap" class="mt-6"></section>
 
+    <!-- Liên hệ -->
     <section class="card p-5 sm:p-6 mt-6">
       <h2 class="font-semibold mb-3 text-lg">Liên hệ nhanh</h2>
       <div class="flex flex-wrap gap-3">
@@ -162,6 +203,7 @@
       </div>
     </section>
 
+    <!-- YouTube -->
     <section class="card p-5 sm:p-6 mt-6" id="video">
       <h2 class="font-semibold mb-3 text-lg">Video nhạc</h2>
       <div class="video-wrap">
@@ -169,7 +211,7 @@
           src="https://www.youtube.com/embed/I21BpYYoMsk?enablejsapi=1&rel=0&modestbranding=1&playsinline=1"
           title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
-      <p class="text-xs subtle mt-2">* Nút 🎵 ở góc trên sẽ phát/tạm dừng video này. Khi bạn bấm video, nút cũng đổi theo.</p>
+      <p class="text-xs subtle mt-2">* Nút 🎵 ở góc trên sẽ phát/tạm dừng video này. Bấm video cũng đồng bộ nút.</p>
     </section>
 
     <footer class="mt-10 text-center">
@@ -177,78 +219,177 @@
     </footer>
   </main>
 
+  <!-- Waves bottom -->
   <div class="wave-bg"><div class="wave"></div><div class="wave"></div><div class="wave"></div></div>
 
 <script>
-  /* Theme */
+  /* ===== THEME ===== */
   const btnTheme=document.getElementById('btnTheme');
   const toggleTheme=()=>{ const r=document.documentElement; r.classList.toggle('dark'); localStorage.setItem('theme', r.classList.contains('dark')?'dark':'light'); };
   btnTheme.addEventListener('click', toggleTheme, {passive:true});
   btnTheme.addEventListener('touchstart', (e)=>{e.preventDefault();toggleTheme();},{passive:false});
 
-  /* YouTube sync */
+  /* ===== YOUTUBE ===== */
   const btnMusic=document.getElementById('btnMusic');
   let ytApiLoaded=false, ytPlayer=null, ytReady=false;
-  function loadYTApi(){ if(ytApiLoaded) return; ytApiLoaded=true; const s=document.createElement('script'); s.src="https://www.youtube.com/iframe_api"; document.head.appendChild(s);
-    window.onYouTubeIframeAPIReady=function(){ ytPlayer=new YT.Player('yt-player',{events:{onReady:()=>{ytReady=true},onStateChange:(e)=>{ if(e.data===1){btnMusic.classList.add('active');btnMusic.textContent='⏸'} if(e.data===2||e.data===0){btnMusic.classList.remove('active');btnMusic.textContent='▶'} }}}); }; }
+  function loadYTApi(){ if(ytApiLoaded) return; ytApiLoaded=true;
+    const s=document.createElement('script'); s.src="https://www.youtube.com/iframe_api"; document.head.appendChild(s);
+    window.onYouTubeIframeAPIReady=function(){
+      ytPlayer=new YT.Player('yt-player',{events:{
+        onReady:()=>{ ytReady=true },
+        onStateChange:(e)=>{ if(e.data===1){btnMusic.classList.add('active');btnMusic.textContent='⏸'} if(e.data===2||e.data===0){btnMusic.classList.remove('active');btnMusic.textContent='▶'} }
+      }});
+    };
+  }
   loadYTApi();
   btnMusic.addEventListener('click', ()=>{ if(!ytReady) return; const s=ytPlayer.getPlayerState(); if(s===YT.PlayerState.PLAYING) ytPlayer.pauseVideo(); else ytPlayer.playVideo(); });
 
-  /* Receiver banks (STK nhận) */
+  /* ===== Receiver (tài khoản nhận) ===== */
   const BANKS={ MB:{code:"MB",name:"MB Bank",account:"0326615531"}, VCB:{code:"VCB",name:"Vietcombank",account:"9965003865"} };
   let currentBank="MB";
   const cardMB=document.getElementById('cardMB');
   const cardVCB=document.getElementById('cardVCB');
-  function setBank(key){ currentBank=key; cardMB.classList.toggle('active',key==="MB"); cardVCB.classList.toggle('active',key==="VCB");
-    cardMB.querySelector('.chip').classList.toggle('hidden',key!=="MB"); cardVCB.querySelector('.chip').classList.toggle('hidden',key!=="VCB");
-    const info=BANKS[key]; document.getElementById('bankName').value=info.name; document.getElementById('account').value=info.account; }
-  cardMB.addEventListener('click',()=>setBank("MB")); cardVCB.addEventListener('click',()=>setBank("VCB")); setBank("MB");
+  function setBank(key){
+    currentBank=key;
+    cardMB.classList.toggle('active', key==="MB");
+    cardVCB.classList.toggle('active', key==="VCB");
+    cardMB.querySelector('.chip').classList.toggle('hidden', key!=="MB");
+    cardVCB.querySelector('.chip').classList.toggle('hidden', key!=="VCB");
+    const info=BANKS[key];
+    document.getElementById('bankName').value=info.name;
+    document.getElementById('account').value=info.account;
+  }
+  cardMB.addEventListener('click',()=>setBank("MB"));
+  cardVCB.addEventListener('click',()=>setBank("VCB"));
+  setBank("MB");
 
-  /* Amount format */
-  const MIN_AMOUNT=10000; const parseAmt=v=>Number(String(v).replace(/[^\d]/g,"")); const nf=new Intl.NumberFormat('vi-VN');
+  /* ===== Amount format ===== */
+  const MIN_AMOUNT=10000;
+  const parseAmt=v=>Number(String(v).replace(/[^\d]/g,""));
+  const nf=new Intl.NumberFormat('vi-VN');
   const amtInput=document.getElementById('amount'), amtErr=document.getElementById('amountErr');
-  amtInput.addEventListener('input',()=>{ const raw=parseAmt(amtInput.value); amtInput.value=raw?nf.format(raw):""; if(raw && raw<MIN_AMOUNT) amtErr.classList.remove('hidden'); else amtErr.classList.add('hidden'); });
+  amtInput.addEventListener('input',()=>{
+    const raw=parseAmt(amtInput.value);
+    amtInput.value=raw?nf.format(raw):"";
+    if(raw && raw<MIN_AMOUNT) amtErr.classList.remove('hidden'); else amtErr.classList.add('hidden');
+  });
 
-  /* VietQR */
+  /* ===== VietQR ===== */
   function buildVietQRUrl(bank, account, amount, addInfo, style="compact"){
     const base=`https://img.vietqr.io/image/${bank}-${account}-${style}.png`;
-    const qs=new URLSearchParams(); if(amount && Number(amount)>0) qs.set("amount", String(Number(amount))); qs.set("addInfo", addInfo);
+    const qs=new URLSearchParams();
+    if(amount && Number(amount)>0) qs.set("amount", String(Number(amount)));
+    qs.set("addInfo", addInfo);
     return `${base}?${qs.toString()}`;
   }
 
-  /* Helpers */
+  /* ===== Helpers ===== */
   const rand4=()=>String(Math.floor(Math.random()*10000)).padStart(4,"0");
   const makeND=prod=>`DV-${prod}-GEN${rand4()}`;
+
   let timer=null;
-  function startCountdown(expireAt,onTick,onDone){ if(timer) clearInterval(timer);
-    function up(){ const left=expireAt-Date.now(); if(left<=0){ clearInterval(timer); onDone(); return; } const m=Math.floor(left/60000), s=Math.floor((left%60000)/1000); onTick(`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`);} up(); timer=setInterval(up,1000); }
-  function ripple(e){ const btn=e.currentTarget, r=document.createElement('span'); r.className='r'; const rc=btn.getBoundingClientRect(); r.style.width=r.style.height=Math.max(rc.width,rc.height)+'px'; r.style.left=(e.clientX-rc.left)+'px'; r.style.top=(e.clientY-rc.top)+'px'; btn.appendChild(r); setTimeout(()=>r.remove(),450); }
-
-  /* UNIVERSAL open bank app (ngân hàng của KH) */
-  const isAndroid=()=>/Android/i.test(navigator.userAgent); const isiOS=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const BANK_APPS = {
-    MB:  { androidIntent:'intent://open#Intent;scheme=mbbank;package=com.mbmobile;end',                   androidStore:'https://play.google.com/store/search?q=MB%20Bank&c=apps',              iosScheme:'mbbank://',        iosStore:'https://apps.apple.com/vn/search?term=MB%20Bank' },
-    VCB: { androidIntent:'intent://open#Intent;scheme=vcbdigibank;package=com.vcb.digibank;end',          androidStore:'https://play.google.com/store/search?q=Vietcombank%20Digibank&c=apps', iosScheme:'vcbdigibank://',   iosStore:'https://apps.apple.com/vn/search?term=Vietcombank%20Digibank' },
-    TCB: { androidIntent:'intent://open#Intent;scheme=techcombank;package=com.techcombank.bb.app;end',    androidStore:'https://play.google.com/store/search?q=Techcombank&c=apps',            iosScheme:'techcombank://',   iosStore:'https://apps.apple.com/vn/search?term=Techcombank' },
-    BIDV:{ androidIntent:'intent://open#Intent;scheme=bidv;package=com.bidv.smartbanking;end',            androidStore:'https://play.google.com/store/search?q=BIDV%20SmartBanking&c=apps',    iosScheme:'bidv://',          iosStore:'https://apps.apple.com/vn/search?term=BIDV%20SmartBanking' },
-    ACB: { androidIntent:'intent://open#Intent;scheme=acb;package=com.vnpay.ACB;end',                     androidStore:'https://play.google.com/store/search?q=ACB%20mobile%20banking&c=apps', iosScheme:'acb://',           iosStore:'https://apps.apple.com/vn/search?term=ACB%20mobile%20banking' },
-    VPB: { androidIntent:'intent://open#Intent;scheme=vpbank;package=com.vpbank.smartbanking;end',        androidStore:'https://play.google.com/store/search?q=VPBank%20NEO&c=apps',           iosScheme:'vpbank://',        iosStore:'https://apps.apple.com/vn/search?term=VPBank%20NEO' },
-    TPB: { androidIntent:'intent://open#Intent;scheme=tpb;package=com.tpb.mb.gprsandroid;end',            androidStore:'https://play.google.com/store/search?q=TPBank&c=apps',                  iosScheme:'tpbank://',        iosStore:'https://apps.apple.com/vn/search?term=TPBank' },
-    CTG: { androidIntent:'intent://open#Intent;scheme=vietinbank;package=com.vietinbank.ipay;end',        androidStore:'https://play.google.com/store/search?q=VietinBank%20iPay&c=apps',      iosScheme:'vietinbank://',    iosStore:'https://apps.apple.com/vn/search?term=VietinBank%20iPay' }
-  };
-
-  async function openBankApp(bankKey, nd, amount){
-    try{ await navigator.clipboard.writeText(`ND: ${nd} | Số tiền: ${Number(amount).toLocaleString('vi-VN')}đ`);}catch(e){}
-    const app = BANK_APPS[bankKey]; if(!app){ alert("Ngân hàng này chưa cấu hình mở app tự động.\nND & số tiền đã copy, vui lòng mở app và dán."); return; }
-    const fallback = ()=>{ window.location.href = isAndroid()?app.androidStore:app.iosStore; };
-    try{
-      if(isAndroid()){ const t=setTimeout(fallback,1200); window.location.href = app.androidIntent; setTimeout(()=>clearTimeout(t),3000); }
-      else if(isiOS()){ const t=setTimeout(fallback,1200); window.location.href = app.iosScheme; setTimeout(()=>clearTimeout(t),3000); }
-      else { fallback(); }
-    }catch(e){ fallback(); }
+  function startCountdown(expireAt,onTick,onDone){
+    if(timer) clearInterval(timer);
+    function up(){ const left=expireAt-Date.now(); if(left<=0){ clearInterval(timer); onDone(); return; }
+      const m=Math.floor(left/60000), s=Math.floor((left%60000)/1000);
+      onTick(`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`); }
+    up(); timer=setInterval(up,1000);
+  }
+  function ripple(e){
+    const btn=e.currentTarget, r=document.createElement('span'); r.className='r';
+    const rc=btn.getBoundingClientRect(); r.style.width=r.style.height=Math.max(rc.width,rc.height)+'px';
+    r.style.left=(e.clientX-rc.left)+'px'; r.style.top=(e.clientY-rc.top)+'px';
+    btn.appendChild(r); setTimeout(()=>r.remove(),450);
   }
 
+  /* ===== Open app ngân hàng (đã fix iOS) ===== */
+  const isAndroid=()=>/Android/i.test(navigator.userAgent);
+  const isiOS=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // Nhiều scheme cho iOS, intent cho Android
+  const BANK_APPS = {
+    MB:  { iosTry:["mbbank://"],
+           iosStore:"https://apps.apple.com/vn/search?term=MB%20Bank",
+           androidIntent:"intent://open#Intent;scheme=mbbank;package=com.mbmobile;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.mbmobile" },
+    VCB: { iosTry:["vcbdigibank://","vcbpay://"],
+           iosStore:"https://apps.apple.com/vn/search?term=Vietcombank%20Digibank",
+           androidIntent:"intent://open#Intent;scheme=vcbdigibank;package=com.vcb.digibank;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.vcb.digibank" },
+    TCB: { iosTry:["techcombank://","tcbbank://"],
+           iosStore:"https://apps.apple.com/vn/search?term=Techcombank",
+           androidIntent:"intent://open#Intent;scheme=techcombank;package=com.techcombank.bb.app;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.techcombank.bb.app" },
+    BIDV:{ iosTry:["bidv://","smartbankingbidv://"],
+           iosStore:"https://apps.apple.com/vn/search?term=BIDV%20SmartBanking",
+           androidIntent:"intent://open#Intent;scheme=bidv;package=com.bidv.smartbanking;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.bidv.smartbanking" },
+    ACB: { iosTry:["acb://"],
+           iosStore:"https://apps.apple.com/vn/search?term=ACB%20mobile%20banking",
+           androidIntent:"intent://open#Intent;scheme=acb;package=com.vnpay.ACB;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.vnpay.ACB" },
+    VPB: { iosTry:["vpbank://","vpbankneo://"],
+           iosStore:"https://apps.apple.com/vn/search?term=VPBank%20NEO",
+           androidIntent:"intent://open#Intent;scheme=vpbank;package=com.vpbank.smartbanking;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.vpbank.smartbanking" },
+    TPB: { iosTry:["tpbank://","tpb://"],
+           iosStore:"https://apps.apple.com/vn/search?term=TPBank",
+           androidIntent:"intent://open#Intent;scheme=tpb;package=com.tpb.mb.gprsandroid;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.tpb.mb.gprsandroid" },
+    CTG: { iosTry:["vietinbank://","ipayvietinbank://"],
+           iosStore:"https://apps.apple.com/vn/search?term=VietinBank%20iPay",
+           androidIntent:"intent://open#Intent;scheme=vietinbank;package=com.vietinbank.ipay;end",
+           androidStore:"https://play.google.com/store/apps/details?id=com.vietinbank.ipay" }
+  };
+
+  // iOS: thử 1 scheme, nếu trong TIMEOUT mà trang bị ẩn => coi như app đã mở -> hủy fallback
+  function tryOpenIOS(scheme, TIMEOUT=2500){
+    return new Promise(resolve=>{
+      let opened=false;
+      const onHide=()=>{ opened=true; cleanup(); resolve(true); };
+      const cleanup=()=>{ document.removeEventListener('visibilitychange', onHide); clearTimeout(tid); if(ifr&&ifr.remove) ifr.remove(); };
+
+      document.addEventListener('visibilitychange', onHide, {once:true});
+      // dùng iframe ẩn để tránh popup-block
+      const ifr=document.createElement('iframe');
+      ifr.style.display='none'; ifr.src=scheme; document.body.appendChild(ifr);
+      const tid=setTimeout(()=>{ if(!opened){ cleanup(); resolve(false); } }, TIMEOUT);
+    });
+  }
+
+  async function openBankApp(bankKey, nd, amount){
+    // Copy ND + số tiền trước
+    try{ await navigator.clipboard.writeText(`ND: ${nd} | Số tiền: ${Number(amount).toLocaleString('vi-VN')}đ`);}catch(e){}
+
+    const cfg=BANK_APPS[bankKey];
+    if(!cfg){ alert("Ngân hàng này chưa cấu hình mở app tự động.\nND & số tiền đã copy, hãy mở app và dán."); return; }
+
+    if(isAndroid()){
+      const goStore=()=>{ location.href = cfg.androidStore; };
+      try{
+        const t=setTimeout(goStore,1500);
+        location.href = cfg.androidIntent;
+        setTimeout(()=>clearTimeout(t),3500);
+      }catch(e){ goStore(); }
+      return;
+    }
+
+    if(isiOS()){
+      // thử lần lượt nhiều scheme
+      for(const scheme of (cfg.iosTry||[])){
+        const ok = await tryOpenIOS(scheme, 2500);
+        if(ok) return; // đã mở app (trang bị ẩn)
+      }
+      // không mở được -> App Store
+      location.href = cfg.iosStore;
+      return;
+    }
+
+    // desktop
+    location.href = cfg.androidStore || cfg.iosStore || 'https://google.com';
+  }
+
+  /* ===== Render kết quả ===== */
   function buildVietQR(nd, amount, style, bankKey){
     const info=(bankKey==='MB')?{code:'MB',account:'0326615531'}:{code:'VCB',account:'9965003865'};
     return buildVietQRUrl(info.code, info.account, amount, nd, style);
@@ -301,7 +442,7 @@
             <button class="btn-ripple tap-btn" onmousedown="ripple(event)" onclick="openBankApp('TPB','${nd}',${amount})">TPBank</button>
             <button class="btn-ripple tap-btn" onmousedown="ripple(event)" onclick="openBankApp('CTG','${nd}',${amount})">VietinBank</button>
           </div>
-          <p class="text-xs subtle mt-2">(*) Một số app không hỗ trợ điền sẵn từ web – mình đã copy ND & số tiền, bạn chỉ cần dán.</p>
+          <p class="text-xs subtle mt-2">(*) Một số app không cho điền sẵn từ web – ND & số tiền đã copy, bạn chỉ cần dán.</p>
         </div>
 
         ${email?`<p class="text-sm subtle mt-3">Email khách: ${email}</p>`:""}
@@ -310,14 +451,17 @@
 
     const cd=document.getElementById('countdown'), img=document.getElementById('qrImg');
     startCountdown(expireAt,(t)=>cd.textContent=t,()=>{
-      img.classList.add('opacity-30','grayscale'); cd.textContent="HẾT HẠN";
-      const b=document.createElement('button'); b.className='mt-3 btn-ripple tap-btn'; b.textContent='Tạo lại QR mới';
-      b.onmousedown=ripple; b.onclick=()=>location.reload(); document.getElementById('qrCard').appendChild(b);
+      img.classList.add('opacity-30','grayscale');
+      cd.textContent="HẾT HẠN";
+      const b=document.createElement('button');
+      b.className='mt-3 btn-ripple tap-btn'; b.textContent='Tạo lại QR mới';
+      b.onmousedown=ripple; b.onclick=()=>location.reload();
+      document.getElementById('qrCard').appendChild(b);
     });
     window.scrollTo({top:wrap.offsetTop-8,behavior:'smooth'});
   }
 
-  /* Create QR */
+  /* ===== Create QR ===== */
   document.getElementById('btnCreate').addEventListener('click',async ()=>{
     const product=document.getElementById('product').value.trim();
     const amount=Number(String(document.getElementById('amount').value).replace(/[^\d]/g,''));
@@ -325,8 +469,10 @@
     const style=document.getElementById('qrStyle').value.trim();
     const autoCopy=(document.getElementById('autoCopy').value==='1');
 
-    if(!amount || amount<10000){ document.getElementById('amountErr').classList.remove('hidden'); document.getElementById('amount').focus(); return; }
-    else document.getElementById('amountErr').classList.add('hidden');
+    if(!amount || amount<10000){
+      document.getElementById('amountErr').classList.remove('hidden');
+      document.getElementById('amount').focus(); return;
+    } else document.getElementById('amountErr').classList.add('hidden');
 
     const nd=makeND(product);
     const qrUrl=buildVietQR(nd, amount, style, currentBank);
